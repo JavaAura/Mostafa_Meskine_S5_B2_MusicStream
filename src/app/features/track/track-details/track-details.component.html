@@ -1,0 +1,12 @@
+<h2>Add Track</h2>
+<form (ngSubmit)="addTrack()">
+  <label>Track Name:</label>
+  <input [(ngModel)]="track.name" name="name" required />
+  <label>Artist:</label>
+  <input [(ngModel)]="track.artist" name="artist" required />
+  <label>Description:</label>
+  <textarea [(ngModel)]="track.description" name="description"></textarea>
+  <label>Category:</label>
+  <input [(ngModel)]="track.category" name="category" required />
+  <button type="submit">Add Track</button>
+</form>

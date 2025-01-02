@@ -1,1 +1,16 @@
-<p>library works!</p>
+<div class="library">
+  <h1>Track Library</h1>
+  <div *ngIf="tracks.length > 0; else noTracks">
+    <ul>
+      <li *ngFor="let track of tracks">
+        <h3>{{ track.name }}</h3>
+        <p>{{ track.artist }}</p>
+        <p>{{ track.category }}</p>
+        <button (click)="deleteTrack(track.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noTracks>
+    <p>No tracks available. Add some tracks to view them here.</p>
+  </ng-template>
+</div>
