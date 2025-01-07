@@ -1,7 +1,7 @@
 <header
-  class="container mx-auto z-40 md:px-0 px-4 bg-[#111111] dark:bg-white rounded-b-xl overflow-hidden fixed top-0">
+  class="container mx-auto z-40 md:px-0 px-4 from-black from-20% bg-gradient-to-b dark:bg-white rounded-b-xl overflow-hidden fixed top-0">
   <!-- Nav -->
-  <nav class="dark:bg-white shadow-lg w-full z-50">
+  <nav class="shadow-lg w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
@@ -40,8 +40,7 @@
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex space-x-8 text-gray-400 dark:text-gray-700">
-          <a routerLink="/library" class="nav hover:text-orange-400 dark:hover:text-orange-600">Library</a>
-          <a routerLink="/track" class="nav hover:text-orange-400 dark:hover:text-orange-600 ">Track</a>
+          <a routerLink="/home" class="nav hover:text-orange-400 dark:hover:text-orange-600">Home</a>
           <a routerLink="/library" class="nav hover:text-orange-400 dark:hover:text-orange-600">Library</a>
           <a routerLink="/track" class="nav hover:text-orange-400 dark:hover:text-orange-600 ">Track</a>
         </div>
@@ -70,11 +69,9 @@
           </svg>
         </button>
         <nav class="space-y-4 text-gray-400 dark:text-gray-700">
-          <a href="#about" class="block text-orange-400 dark:text-orange-600">Home</a>
-          <a href="#what-i-do" class="block hover:text-orange-400 dark:hover:text-orange-600 ">What I Do</a>
-          <a href="#testimonials" class="block hover:text-orange-400 dark:hover:text-orange-600 ">Testimonials</a>
-          <a href="#clients" class="block hover:text-orange-400 dark:hover:text-orange-600 ">Clients</a>
-          <a href="#fun-facts" class="block hover:text-orange-400 dark:hover:text-orange-600 ">Fun Facts</a>
+          <a routerLink="/home" class="nav block text-orange-400 dark:text-orange-600">Home</a>
+          <a routerLink="/library" class="nav block hover:text-orange-400 dark:hover:text-orange-600 ">Library</a>
+          <a routerLink="/track" class="nav block hover:text-orange-400 dark:hover:text-orange-600 ">Track</a>
         </nav>
       </div>
     </div>
