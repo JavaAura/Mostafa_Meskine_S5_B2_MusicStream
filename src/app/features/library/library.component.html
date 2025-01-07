@@ -1,16 +1,27 @@
-<div class="library">
-  <h1>Track Library</h1>
-  <div *ngIf="tracks.length > 0; else noTracks">
-    <ul>
-      <li *ngFor="let track of tracks">
-        <h3>{{ track.name }}</h3>
-        <p>{{ track.artist }}</p>
-        <p>{{ track.category }}</p>
-        <button (click)="deleteTrack(track.id)">Delete</button>
-      </li>
-    </ul>
+<section class="p-10">
+  <div class="flex w-full justify-center items-center">
+    <h1 class="text-4xl font-extrabold capitalize leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
+      Where melodies come alive</h1>
   </div>
+  <ng-container *ngIf="tracks$ | async as tracks">
+    <div *ngIf="tracks.length > 0; else noTracks" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div *ngFor="let track of (tracks$ | async)"
+           class="group relative bg-white rounded-lg h-auto lg:min-h-60 max-w-full overflow-hidden"
+           style="background-image: url('../../../assets/images/track_default_bg.jpg'); background-size: cover">
+        <a routerLink="/track/details">
+          <div
+            class="w-full h-full p-4 rounded-lg lg:opacity-0 group-hover:opacity-80 group-hover:absolute top-0 left-0 bg-gradient-to-tr from-black duration-300">
+            <h3 class="lg:text-lg font-semibold outline-2 outline-black">{{ track.title }}</h3>
+            <p class="text-xs lg:text-sm">{{ track.artist }}</p>
+            <p class="text-xs lg:text-sm">{{ track.category }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+
   <ng-template #noTracks>
-    <p>No tracks available. Add some tracks to view them here.</p>
+    <p></p>
   </ng-template>
-</div>
+</section>
+

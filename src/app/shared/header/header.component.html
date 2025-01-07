@@ -1,0 +1,82 @@
+<header
+  class="container mx-auto z-40 md:px-0 px-4 bg-[#111111] dark:bg-white rounded-b-xl overflow-hidden fixed top-0">
+  <!-- Nav -->
+  <nav class="dark:bg-white shadow-lg w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a routerLink="/library"
+             class="lg:text-xl md:text-lg text-sm font-bold text-gray-700 dark:text-white capitalize flex gap-2">
+            <div>
+              <span
+                class="px-2 py-0.5 text-white bg-orange-400 dark:bg-orange-600 rounded-full animate-[ping_2s_linear_infinite]">P</span>
+              <span
+                class="px-2 py-0.5 text-white bg-orange-400 dark:bg-orange-600 rounded-full animate-[ping_3s_linear_infinite]">A</span>
+              <span
+                class="px-2 py-0.5 text-white bg-orange-400 dark:bg-orange-600 rounded-full animate-[ping_2s_linear_infinite]">R</span>
+              <span
+                class="px-2 py-0.5 text-white bg-orange-400 dark:bg-orange-600 rounded-full animate-[ping_3s_linear_infinite]">O</span>
+              <span
+                class="px-2 py-0.5 text-white bg-orange-400 dark:bg-orange-600 rounded-full animate-[ping_2s_linear_infinite]">L</span>
+              <span
+                class="px-2 py-0.5 text-white bg-orange-400 dark:bg-orange-600 rounded-full animate-[ping_3s_linear_infinite]">Y</span>
+            </div>
+            <svg class="text-orange-400 animate-[ping_1s_linear_infinite]" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24" width="24" height="24" fill="none">
+              <path
+                d="M7 9.5C7 10.8807 5.88071 12 4.5 12C3.11929 12 2 10.8807 2 9.5C2 8.11929 3.11929 7 4.5 7C5.88071 7 7 8.11929 7 9.5ZM7 9.5V2C7.33333 2.5 7.6 4.6 10 5"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="10.5" cy="19.5" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="20" cy="18" r="2" stroke="currentColor" stroke-width="1.5"/>
+              <path
+                d="M13 19.5L13 11C13 10.09 13 9.63502 13.2466 9.35248C13.4932 9.06993 13.9938 9.00163 14.9949 8.86504C18.0085 8.45385 20.2013 7.19797 21.3696 6.42937C21.6498 6.24509 21.7898 6.15295 21.8949 6.20961C22 6.26627 22 6.43179 22 6.76283V17.9259"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13 13C17.8 13 21 10.6667 22 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8 text-gray-400 dark:text-gray-700">
+          <a routerLink="/library" class="nav hover:text-orange-400 dark:hover:text-orange-600">Library</a>
+          <a routerLink="/track" class="nav hover:text-orange-400 dark:hover:text-orange-600 ">Track</a>
+          <a routerLink="/library" class="nav hover:text-orange-400 dark:hover:text-orange-600">Library</a>
+          <a routerLink="/track" class="nav hover:text-orange-400 dark:hover:text-orange-600 ">Track</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button (click)="collapse()" id="mobile-menu-button"
+                  class="text-orange-400 dark:text-orange-600 hover:text-orange-600 focus:outline-none">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="absolute inset-0 bg-[#111111] dark:bg-white bg-opacity-50 z-50 hidden">
+      <div
+        class="fixed inset-y-0 left-0 bg-[#111111] dark:bg-white w-64 p-6 transform -translate-x-full transition-transform">
+        <button id="close-menu-button"
+                class="text-orange-400 dark:text-orange-600 hover:text-orange-600 focus:outline-none mb-4">
+          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <nav class="space-y-4 text-gray-400 dark:text-gray-700">
+          <a href="#about" class="block text-orange-400 dark:text-orange-600">Home</a>
+          <a href="#what-i-do" class="block hover:text-orange-400 dark:hover:text-orange-600 ">What I Do</a>
+          <a href="#testimonials" class="block hover:text-orange-400 dark:hover:text-orange-600 ">Testimonials</a>
+          <a href="#clients" class="block hover:text-orange-400 dark:hover:text-orange-600 ">Clients</a>
+          <a href="#fun-facts" class="block hover:text-orange-400 dark:hover:text-orange-600 ">Fun Facts</a>
+        </nav>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,20 @@
+<h2 class="text-2xl font-bold mb-4">Add Track</h2>
+<form (ngSubmit)="addTrack()" class="space-y-4">
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Track Name:</label>
+    <input [(ngModel)]="track.title" name="title" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+  </div>
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Artist:</label>
+    <input [(ngModel)]="track.artist" name="artist" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+  </div>
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Description:</label>
+    <textarea [(ngModel)]="track.description" name="description" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+  </div>
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Category:</label>
+    <input [(ngModel)]="track.category" name="category" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+  </div>
+  <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Track</button>
+</form>
