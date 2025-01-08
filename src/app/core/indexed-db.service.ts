@@ -1,25 +1,28 @@
 import { Injectable } from '@angular/core';
-import {openDB, IDBPDatabase} from 'idb';
+import { openDB, IDBPDatabase } from 'idb';
 import { Observable, from } from 'rxjs';
-import { MusicStreamDB } from '../models/track.model';
+import {MusicStreamDB, Track} from '../models/track.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IndexedDbService {
-  private db!: IDBPDatabase;
+  private db!: IDBPDatabase<MusicStreamDB>;
 
   constructor() {
     this.initDB().then(r => console.log('DB initialized'));
   }
 
   private async initDB() {
-    this.db = await openDB('MusicStreamDB', 1, {
+    this.db = await openDB<MusicStreamDB>('MusicStreamDB', 1, {
       upgrade(db) {
         if (!db.objectStoreNames.contains('tracks')) {
-          const store = db.createObjectStore('tracks', { keyPath: 'id', autoIncrement: true });
-          store.createIndex('title', 'title', { unique: false });
-          store.createIndex('category', 'category', { unique: false });
+          const trackStore = db.createObjectStore('tracks', { keyPath: 'id', autoIncrement: true });
+          trackStore.createIndex('title', 'title', { unique: false });
+          trackStore.createIndex('category', 'category', { unique: false });
+        }
+        if (!db.objectStoreNames.contains('audioFiles')) {
+          db.createObjectStore('audioFiles', { keyPath: 'id', autoIncrement: true });
         }
       },
     });
@@ -31,9 +34,7 @@ export class IndexedDbService {
     }
   }
 
-  // Add a new track (Observable)
   addTrack(track: Omit<MusicStreamDB['tracks']['value'], 'id'>): Observable<MusicStreamDB['tracks']['value']> {
-    console.log('track', track);
     return from(
       this.db.put('tracks', track).then((id) => {
         return { ...track, id: id as number };
@@ -41,27 +42,31 @@ export class IndexedDbService {
     );
   }
 
-  // Get all tracks (Observable)
+  addAudioFile(audioFile: Omit<MusicStreamDB['audioFiles']['value'], 'id'>): Observable<MusicStreamDB['audioFiles']['value']> {
+    return from(
+      this.db.put('audioFiles', audioFile).then((id) => {
+        return { ...audioFile, id: id as number };
+      })
+    );
+  }
+
   getAllTracks(): Observable<MusicStreamDB['tracks']['value'][]> {
     return from(
       (async () => {
-        await this.ensureDBInitialized();  // Ensure DB is initialized
+        await this.ensureDBInitialized();
         return this.db.getAll('tracks');
       })()
     );
   }
 
-  // Get a single track by ID (Observable)
   getTrackById(id: number): Observable<MusicStreamDB['tracks']['value'] | undefined> {
     return from(this.db.get('tracks', id));
   }
 
-  // Update a track (Observable)
   updateTrack(track: MusicStreamDB['tracks']['value']): Observable<void> {
     return from(this.db.put('tracks', track).then(() => {}));
   }
 
-  // Delete a track (Observable)
   deleteTrack(id: number): Observable<void> {
     return from(this.db.delete('tracks', id));
   }

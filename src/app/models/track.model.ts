@@ -1,4 +1,4 @@
-import {DBSchema} from "idb";
+import { DBSchema } from 'idb';
 
 export interface MusicStreamDB extends DBSchema {
   audioFiles: {
@@ -18,12 +18,17 @@ export interface MusicStreamDB extends DBSchema {
       id?: number;
       title: string;
       artist: string;
-      description?: string; // Max 200 characters
-      category: string; // E.g., pop, rock, rap, etc.
-      duration: number; // Calculated automatically
+      description?: string;
+      category: string;
+      duration: number;
       createdAt: Date;
+    };
+    indexes: {
+      title: string;
+      category: string;
     };
   };
 }
 
 export type Track = MusicStreamDB['tracks']['value'];
+export type AudioFile = MusicStreamDB['audioFiles']['value'];

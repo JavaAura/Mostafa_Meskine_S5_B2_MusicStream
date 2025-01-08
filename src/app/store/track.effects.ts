@@ -4,12 +4,14 @@ import {catchError, map, mergeMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {TracksService} from '../features/services/tracks.service';
 import * as TrackActions from './track.actions';
+import {IndexedDbService} from "../core/indexed-db.service";
 
 @Injectable()
 export class TrackEffects {
   constructor(
     private actions$: Actions,
-    private trackService: TracksService
+    private trackService: TracksService,
+    private indexedDbService: IndexedDbService
   ) {
   }
 
@@ -29,9 +31,13 @@ export class TrackEffects {
     this.actions$.pipe(
       ofType(TrackActions.addTrack),
       mergeMap(action =>
-        this.trackService.addTrack(action.track).pipe(
-          map(track => TrackActions.addTrackSuccess({track})),
-          catchError(error => of(TrackActions.addTrackFailure({error})))
+        this.indexedDbService.addAudioFile(action.audioFile).pipe(
+          mergeMap(audioFile =>
+            this.indexedDbService.addTrack({ ...action.track, createdAt: new Date() }).pipe(
+              map(track => TrackActions.addTrackSuccess({ track })),
+              catchError(error => of(TrackActions.addTrackFailure({ error })))
+            )
+          )
         )
       )
     )
