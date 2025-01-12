@@ -1,9 +1,10 @@
 <ng-container *ngIf="track$ | async as track; else notfound" class="w-full">
   <div class="max-w-full bg-white rounded-lg shadow-lg overflow-hidden">
     <div class="relative">
-      <img
-        src="https://images.unsplash.com/photo-1500099817043-86d46000d58f?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&h=250&q=80"
-        class="w-full" alt="track picture">
+      <img *ngIf="track?.coverImage" [src]="track.coverImage | safeUrl" class="w-full" alt="track cover image">
+      <img *ngIf="!track?.coverImage"
+           src="https://images.unsplash.com/photo-1500099817043-86d46000d58f?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&h=250&q=80"
+           class="w-full" alt="track default cover image">
       <div
         class="absolute p-4 inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-gray-900 backdrop backdrop-blur-5 text-white">
         <h3 class="font-bold">{{ track?.artist }}</h3>

@@ -25,8 +25,7 @@ export class TrackDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store,
     private indexedDbService: IndexedDbService,
-    protected audioService: AudioService,
-    private renderer: Renderer2
+    protected audioService: AudioService
   ) {
     const stringTrackId = this.route.snapshot.paramMap.get('id');
     const trackId = stringTrackId ? parseInt(stringTrackId, 10) : null;
@@ -110,7 +109,4 @@ export class TrackDetailsComponent implements OnInit {
     const time = parseFloat(input.value);
     this.audioService.setCurrentTime(time);
   }
-
-  protected readonly HTMLInputElement = HTMLInputElement;
-  protected readonly console = console;
 }

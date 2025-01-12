@@ -22,6 +22,7 @@ export interface MusicStreamDB extends DBSchema {
       category: string;
       duration: number;
       createdAt: Date;
+      coverImage?: Blob;
     };
     indexes: {
       title: string;

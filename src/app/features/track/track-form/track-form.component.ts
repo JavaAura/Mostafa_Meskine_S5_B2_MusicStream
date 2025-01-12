@@ -11,6 +11,7 @@ import * as TrackActions from '../../../store/track.actions';
 export class TrackFormComponent {
   track: Partial<Track> = {};
   selectedFile: File | null = null;
+  selectedCoverImage: File | null = null;
 
   constructor(private store: Store) {}
 
@@ -22,6 +23,18 @@ export class TrackFormComponent {
         this.selectedFile = file;
       } else {
         alert('File size exceeds 15MB limit.');
+      }
+    }
+  }
+
+  onCoverImageSelected(event: Event): void { // Add this method
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      if (file.size <= 5 * 1024 * 1024) { // 5MB limit
+        this.selectedCoverImage = file;
+      } else {
+        alert('Cover image size exceeds 5MB limit.');
       }
     }
   }
@@ -43,7 +56,20 @@ export class TrackFormComponent {
             createdAt: new Date()
           };
           this.track.duration = duration;
-          this.store.dispatch(TrackActions.addTrack({ track: this.track as Track, audioFile }));
+
+          if (this.selectedCoverImage) {
+            const coverReader = new FileReader();
+            coverReader.onload = () => {
+              const coverBlob = new Blob([coverReader.result as ArrayBuffer], { type: this.selectedCoverImage!.type });
+              if (coverBlob) {
+                this.track.coverImage = coverBlob;
+                this.store.dispatch(TrackActions.addTrack({ track: this.track as Track, audioFile }));
+              }
+            };
+            coverReader.readAsArrayBuffer(this.selectedCoverImage);
+          } else {
+            this.store.dispatch(TrackActions.addTrack({ track: this.track as Track, audioFile }));
+          }
         };
       };
       reader.readAsArrayBuffer(this.selectedFile);
