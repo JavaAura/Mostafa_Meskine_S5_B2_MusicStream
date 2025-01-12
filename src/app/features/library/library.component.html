@@ -44,7 +44,7 @@
       <div *ngFor="let track of (tracks$ | async)"
            class="group relative bg-white rounded-lg h-auto lg:min-h-60 max-w-full overflow-hidden shadow-orange-600 shadow-md"
            style="background-image: url('../../../assets/images/track_default_bg.jpg'); background-size: cover">
-        <a routerLink="/track/details">
+        <a [routerLink]="['/track/details', track.id]">
           <div
             class="w-full h-full p-4 rounded-lg lg:opacity-0 group-hover:opacity-80 group-hover:absolute top-0 left-0 bg-gradient-to-tr from-black duration-300">
             <h3 class="lg:text-lg font-semibold outline-2 outline-black">{{ track.title }}</h3>
@@ -57,7 +57,7 @@
   </ng-container>
 
   <ng-template #noTracks>
-    <p></p>
+    <p>no tracks added yet</p>
   </ng-template>
 </section>
 

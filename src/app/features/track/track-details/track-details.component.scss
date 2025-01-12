@@ -1,0 +1,45 @@
+input[type="range"].custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0; /* Set width to 0 to make it disappear */
+  height: 0; /* Set height to 0 to make it disappear */
+  background: transparent; /* Make it transparent */
+  cursor: pointer;
+}
+
+input[type="range"].custom-range::-moz-range-thumb {
+  width: 0; /* Set width to 0 to make it disappear */
+  height: 0; /* Set height to 0 to make it disappear */
+  background: transparent; /* Make it transparent */
+  cursor: pointer;
+}
+
+input[type="range"].custom-range::-ms-thumb {
+  width: 0; /* Set width to 0 to make it disappear */
+  height: 0; /* Set height to 0 to make it disappear */
+  background: transparent; /* Make it transparent */
+  cursor: pointer;
+}
+
+/* Add this CSS to your styles */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: orange;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: orange;
+  border-radius: 50%;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 12px;
+  height: 12px;
+  background: orange;
+  border-radius: 50%;
+}

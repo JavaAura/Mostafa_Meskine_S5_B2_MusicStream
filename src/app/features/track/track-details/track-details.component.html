@@ -1,0 +1,82 @@
+<ng-container *ngIf="track$ | async as track; else notfound" class="w-full">
+  <div class="max-w-full bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="relative">
+      <img
+        src="https://images.unsplash.com/photo-1500099817043-86d46000d58f?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&h=250&q=80"
+        class="w-full" alt="track picture">
+      <div
+        class="absolute p-4 inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-gray-900 backdrop backdrop-blur-5 text-white">
+        <h3 class="font-bold">{{ track?.artist }}</h3>
+        <span class="opacity-70">{{ track?.title }}</span>
+      </div>
+    </div>
+    <div>
+      <div class="relative h-1 bg-gray-200">
+        <input type="range" min="0" [max]="track?.duration" [(ngModel)]="currentTime" (input)="onTimeChange($event)"
+               class="absolute w-full h-full appearance-none bg-transparent cursor-pointer custom-range">
+        <div class="absolute h-full bg-orange-600" [style.width.%]="(currentTime / (track?.duration || 1)) * 100"></div>
+      </div>
+    </div>
+    <div class="flex justify-between text-xs font-semibold text-gray-500 px-4 py-2">
+      <div>
+        {{ audioService.getCurrentTime() | timeFormat }}
+      </div>
+      <div class="flex space-x-3 p-2">
+        <button class="focus:outline-none" (click)="previousTrack()">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+            <line x1="5" y1="19" x2="5" y2="5"></line>
+          </svg>
+        </button>
+        <button
+          class="rounded-full w-8 h-8 flex items-center justify-center pl-0.5 ring-2 ring-gray-100 focus:outline-none"
+          (click)="togglePlayPause()">
+          <ng-container *ngIf="isPlaying; else playIcon">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+          </ng-container>
+          <ng-template #playIcon>
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </ng-template>
+        </button>
+        <button class="focus:outline-none" (click)="nextTrack()">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+            <line x1="19" y1="5" x2="19" y2="19"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="flex gap-5">
+        <svg class="text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+             fill="none">
+          <path
+            d="M14 14.8135V9.18646C14 6.04126 14 4.46866 13.0747 4.0773C12.1494 3.68593 11.0603 4.79793 8.88232 7.02192C7.75439 8.17365 7.11085 8.42869 5.50604 8.42869C4.10257 8.42869 3.40084 8.42869 2.89675 8.77262C1.85035 9.48655 2.00852 10.882 2.00852 12C2.00852 13.118 1.85035 14.5134 2.89675 15.2274C3.40084 15.5713 4.10257 15.5713 5.50604 15.5713C7.11085 15.5713 7.75439 15.8264 8.88232 16.9781C11.0603 19.2021 12.1494 20.3141 13.0747 19.9227C14 19.5313 14 17.9587 14 14.8135Z"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17 9C17.6254 9.81968 18 10.8634 18 12C18 13.1366 17.6254 14.1803 17 15" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 7C21.2508 8.36613 22 10.1057 22 12C22 13.8943 21.2508 15.6339 20 17" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="relative w-full">
+          <input #volumeSlider class="absolute h-1 appearance-none" type="range" id="volume" min="0" max="1"
+                 step="0.01" (input)="setVolume(volumeSlider.value)"/>
+          <div class="absolute h-full bg-orange-600" [style.width.%]="volume * 100"></div>
+        </div>
+      </div>
+      <div>
+        {{ track.duration | timeFormat }}
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #notfound>
+  <p class="mt-20 p-10">Track not found</p>
+</ng-template>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { openDB, IDBPDatabase } from 'idb';
 import { Observable, from } from 'rxjs';
-import {MusicStreamDB, Track} from '../models/track.model';
+import {AudioFile, MusicStreamDB, Track} from '../models/track.model';
 
 @Injectable({
   providedIn: 'root',
@@ -69,5 +69,9 @@ export class IndexedDbService {
 
   deleteTrack(id: number): Observable<void> {
     return from(this.db.delete('tracks', id));
+  }
+
+  getAudioFileById(id: number): Observable<AudioFile | undefined> {
+    return from(this.db.get('audioFiles', id));
   }
 }

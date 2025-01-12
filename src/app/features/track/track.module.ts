@@ -5,12 +5,17 @@ import { TrackRoutingModule } from './track-routing.module';
 import { TrackComponent } from './track.component';
 import { TrackFormComponent } from './track-form/track-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SafeUrlPipe} from "../../pipes/safe-url.pipe";
 
 
 @NgModule({
   declarations: [
     TrackComponent,
-    TrackFormComponent
+    TrackFormComponent,
+    SafeUrlPipe
+  ],
+  exports: [
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,

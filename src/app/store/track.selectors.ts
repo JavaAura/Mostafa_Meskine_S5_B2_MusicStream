@@ -12,3 +12,8 @@ export const selectTrackError = createSelector(
   selectTrackState,
   (state: TrackState) => state.error
 );
+
+export const selectTrackById = createSelector(
+  selectAllTracks,
+  (tracks: any[], props: { id: any; }) => tracks.find(track => track.id === props.id)
+);

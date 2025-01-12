@@ -6,7 +6,7 @@ import {TrackFormComponent} from "./track-form/track-form.component";
 
 const routes: Routes = [
   { path: '', component: TrackComponent },
-  { path: 'details', component: TrackDetailsComponent },
+  { path: 'details/:id', component: TrackDetailsComponent },
   { path: 'add', component: TrackFormComponent },
 ];
 

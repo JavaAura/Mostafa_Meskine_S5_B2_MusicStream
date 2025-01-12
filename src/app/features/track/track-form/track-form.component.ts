@@ -32,14 +32,19 @@ export class TrackFormComponent {
       reader.onload = () => {
         const audioData = reader.result as ArrayBuffer;
         const audioBlob = new Blob([audioData], { type: this.selectedFile!.type });
-        const audioFile = {
-          fileName: this.selectedFile!.name,
-          fileBlob: audioBlob,
-          fileType: this.selectedFile!.type,
-          fileSize: this.selectedFile!.size,
-          createdAt: new Date()
+        const audioElement = new Audio(URL.createObjectURL(audioBlob));
+        audioElement.onloadedmetadata = () => {
+          const duration = audioElement.duration;
+          const audioFile = {
+            fileName: this.selectedFile!.name,
+            fileBlob: audioBlob,
+            fileType: this.selectedFile!.type,
+            fileSize: this.selectedFile!.size,
+            createdAt: new Date()
+          };
+          this.track.duration = duration;
+          this.store.dispatch(TrackActions.addTrack({ track: this.track as Track, audioFile }));
         };
-        this.store.dispatch(TrackActions.addTrack({ track: this.track as Track, audioFile }));
       };
       reader.readAsArrayBuffer(this.selectedFile);
     }
