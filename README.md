@@ -1,27 +1,73 @@
-# MusicStream
+# Paroly - MusicStream
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
+This is a web application for managing music tracks, built with Angular and NgRx. It allows users to add, view, and play music tracks, as well as upload cover images for the tracks.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Add new music tracks with metadata (title, artist, description, category)
+- Upload audio files and cover images
+- View track details and play audio
+- Navigate between tracks
+- Adjust volume and track playback time
 
-## Code scaffolding
+## Technologies Used
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular
+- NgRx (for state management)
+- IndexedDB (for storing audio files)
+- Tailwind CSS (for styling)
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Prerequisites
 
-## Running unit tests
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- Angular CLI (v17)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installation
 
-## Running end-to-end tests
+1. Clone the repository:
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Install dependencies:
+   npm install
 
-## Further help
+3. Start the development server:
+   npm start
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Open your browser and navigate to `http://localhost:4200`.
+
+## Project Structure
+
+- `src/app/features/track/track-details/track-details.component.html`: HTML template for track details.
+- `src/app/features/track/track-details/track-details.component.ts`: TypeScript component for track details.
+- `src/app/features/track/track-form/track-form.component.html`: HTML template for adding new tracks.
+- `src/app/features/track/track-form/track-form.component.ts`: TypeScript component for adding new tracks.
+- `src/app/models/track.model.ts`: TypeScript models for track and audio file.
+- `src/app/store/track.actions.ts`: NgRx actions for track management.
+- `src/app/store/track.selectors.ts`: NgRx selectors for track management.
+- `src/app/core/indexed-db.service.ts`: Service for interacting with IndexedDB.
+- `src/app/services/audio.service.ts`: Service for handling audio playback.
+
+## Usage
+
+### Adding a New Track
+
+1. Navigate to the "Add Track" page.
+2. Fill in the track details (title, artist, description, category).
+3. Upload an audio file (max 15MB).
+4. Upload a cover image (optional, max 5MB).
+5. Click "Save" to add the track.
+
+### Viewing and Playing Tracks
+
+1. Navigate to the "Track Details" page.
+2. Use the play/pause button to control playback.
+3. Adjust the volume using the volume slider.
+4. Navigate between tracks using the previous/next buttons.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
